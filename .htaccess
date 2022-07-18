@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !\.[a-z]{2,3}$
+
+RewriteRule ([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z]+)  index.php?mod=$1&ctrl=$2&view=$3 [QSA,PT]
+
+ErrorDocument 400 "<h1><i>Sorry! Bad Request!!</i></h1>"
+ErrorDocument 401 "<h1><i>Sorry! Unauthorized!!</i></h1>"
+ErrorDocument 403 "<h1><i>Sorry! Forbidden!!</i></h1>"
+ErrorDocument 404 "<h1><i>Sorry! Page Not Found!!</i></h1>"
+#ErrorDocument 404 "/2022/swbd/static/error.htm"
+ErrorDocument 500 "<h1><i>Sorry! Internal Server Error!!</i></h1>"
+ErrorDocument 504 "<h1><i>Sorry! Gateway Timeout!!</i></h1>"
+
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#
+#错误跳转
+#
+
+RewriteRule ^(.*/.+\.php)$ /2022/swbd/static/err.htm [QSA,PT,L]
+
+</IfModule>
